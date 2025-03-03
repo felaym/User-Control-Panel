@@ -1,0 +1,27 @@
+{
+  "name": "react-user-control-panel",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "lint": "eslint .",
+    "start": "concurrently \"yarn workspace client dev\" \"yarn workspace server start\""
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2",
+    "eslint": "^9.21.0",
+    "eslint-config-airbnb": "^19.0.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-jsx-a11y": "^6.7.1",
+    "eslint-plugin-react": "^7.37.4",
+    "eslint-plugin-react-hooks": "^5.1.0",
+    "eslint-plugin-react-refresh": "^0.4.19"
+  },
+  "packageManager": "yarn@4.1.0",
+  "engines": {
+    "node": ">=18"
+  }
+}
