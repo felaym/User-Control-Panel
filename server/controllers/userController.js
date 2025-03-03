@@ -19,18 +19,21 @@ export const getUsers = async (req, res) => {
     }
 };
 
+// new approach but not pure "update()" function
+// update() function, it's old, and it's advisable to use other methods || func
 export const updateUser = async (req, res) => {
     try {
-        const updatedUser = await User.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true }
-        );
-        res.json(updatedUser);
+        const result = await User.updateOne({ _id: req.params.id }, req.body);
+        if (result.modifiedCount === 0) {
+            return res.status(404).json({ message: "No user was updated." });
+        }
+
+        res.json({ message: "User updated successfully." });
     } catch (error) {
         res.status(400).json({ message: error.message });
     }
 };
+
 
 export const deleteUser = async (req, res) => {
     try {

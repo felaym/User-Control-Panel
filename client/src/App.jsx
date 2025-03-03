@@ -20,10 +20,14 @@ function App() {
     }
   };
 
+  const clearInput = () => {
+    setFormData({ name: '', email: '' });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     await createUser(formData);
-    setFormData({ name: '', email: '' });
+    clearInput();
     fetchUsers();
   };
 
@@ -32,6 +36,19 @@ function App() {
     await updateUser(editData.id, { name: editData.name, email: editData.email });
     setEditData({ id: null, name: '', email: '' });
     fetchUsers();
+  };
+
+  const handleEditClick = (user) => {
+    setEditData({
+      id: user._id,
+      name: user.name,
+      email: user.email
+    });
+  };
+
+  const handleDeleteUser = async (userId) => {
+    await deleteUser(userId);
+    await fetchUsers();
   };
 
   return (
@@ -65,18 +82,12 @@ function App() {
             </span>
             <div>
               <button
-                onClick={() => deleteUser(user._id).then(fetchUsers)}
-                style={{ backgroundColor: '#ff6d62', marginLeft: '8px' }}
+                className='delete-button'
+                onClick={() => handleDeleteUser(user._id)}
               >
                 Delete
               </button>
-              <button
-                onClick={() => setEditData({
-                  id: user._id,
-                  name: user.name,
-                  email: user.email
-                })}
-              >
+              <button onClick={() => handleEditClick(user)}>
                 Edit
               </button>
             </div>

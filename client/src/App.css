@@ -43,6 +43,11 @@ button {
   cursor: pointer;
 }
 
+.delete-button {
+  background-color: #ff6d62;
+  margin-left: 8px;
+}
+
 button:hover {
   background-color: black;
 }
