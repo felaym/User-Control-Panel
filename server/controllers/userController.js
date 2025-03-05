@@ -19,8 +19,8 @@ export const getUsers = async (req, res) => {
     }
 };
 
-// new approach but not pure "update()" function
-// update() function, it's old, and it's advisable to use other methods || func
+/* new approach but not pure "update()" function;
+   there is an update() function, but it's advisable to use other methods or functions */
 export const updateUser = async (req, res) => {
     try {
         const result = await User.updateOne({ _id: req.params.id }, req.body);
