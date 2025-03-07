@@ -1,7 +1,5 @@
 # User Management App
 
-This is a user management application with a React frontend and an Express backend.
-
 ## Technologies Used
 - **Frontend**: React, JSX, CSS
 - **Backend**: Node.js, Express
