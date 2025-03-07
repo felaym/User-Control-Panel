@@ -6,14 +6,16 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import typescriptParser from '@typescript-eslint/parser';
 import typescriptPlugin from '@typescript-eslint/eslint-plugin';
 
+
 export default [
   { ignores: ['dist'] },
   {
-    files: ['**/*.{js,jsx,ts,tsx}'], // Add TypeScript file extensions
+    files: ['**/*.{js,jsx,ts,tsx}'],
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
-      parser: typescriptParser, // Use TypeScript parser
+      parser: typescriptParser,
+
       parserOptions: {
         ecmaVersion: 'latest',
         ecmaFeatures: { jsx: true },
@@ -30,7 +32,8 @@ export default [
       react,
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
-      '@typescript-eslint': typescriptPlugin, // Add TypeScript plugin
+      '@typescript-eslint': typescriptPlugin,
+
     },
     rules: {
       ...js.configs.recommended.rules,
@@ -42,7 +45,7 @@ export default [
         'warn',
         { allowConstantExport: true },
       ],
-      '@typescript-eslint/no-unused-vars': 'warn', // Add TypeScript-specific rules
+      '@typescript-eslint/no-unused-vars': 'warn',
     },
   },
 ];
