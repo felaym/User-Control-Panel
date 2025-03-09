@@ -3,7 +3,7 @@
     "compilerOptions": {
         "composite": true,
         "rootDir": ".",
-        "resolveJsonModule": true,
+        "resolveJsonModule": true
     },
     "include": ["./**/*.ts"],
     "exclude": [
