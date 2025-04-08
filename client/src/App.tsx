@@ -1,11 +1,23 @@
-import { useEffect, useState } from 'react';
-import { getUsers, createUser, updateUser, deleteUser } from './api';
 import './App.css';
 
+import { useEffect, useState } from 'react';
+
+import { createUser, deleteUser, getUsers, updateUser } from './api';
+
+interface User {
+  _id: string;
+  name: string;
+  email: string;
+}
+
 function App() {
-  const [users, setUsers] = useState([]);
-  const [formData, setFormData] = useState({ name: '', email: '' });
-  const [editData, setEditData] = useState({ id: null, name: '', email: '' });
+  const [users, setUsers] = useState<User[]>([]);
+  const [formData, setFormData] = useState<Omit<User, '_id'>>({ name: '', email: '' });
+  const [editData, setEditData] = useState<{ id: string | null } & Omit<User, '_id'>>({
+    id: null,
+    name: '',
+    email: ''
+  });
 
   useEffect(() => {
     fetchUsers();
@@ -16,7 +28,7 @@ function App() {
       const response = await getUsers();
       setUsers(response.data);
     } catch (error) {
-      console.error('Error fetching users:', error);
+      console.error('Error fetching users:', error instanceof Error ? error.message : 'Unknown error');
     }
   };
 
@@ -24,21 +36,22 @@ function App() {
     setFormData({ name: '', email: '' });
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     await createUser(formData);
     clearInput();
-    fetchUsers();
+    await fetchUsers();
   };
 
-  const handleEditSubmit = async (e) => {
+  const handleEditSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!editData.id) return;
     await updateUser(editData.id, { name: editData.name, email: editData.email });
     setEditData({ id: null, name: '', email: '' });
-    fetchUsers();
+    await fetchUsers();
   };
 
-  const handleEditClick = (user) => {
+  const handleEditClick = (user: User) => {
     setEditData({
       id: user._id,
       name: user.name,
@@ -46,7 +59,7 @@ function App() {
     });
   };
 
-  const handleDeleteUser = async (userId) => {
+  const handleDeleteUser = async (userId: string) => {
     await deleteUser(userId);
     await fetchUsers();
   };

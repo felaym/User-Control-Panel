@@ -1,7 +1,14 @@
 .yarn
+.yarnrc.yml
 .pnp.cjs
 .pnp.loader.mjs
 
 .env
 
 node_modules/
+
+vite-env.d.ts
+
+tsconfig.tsbuildinfo
+
+package-lock.json
